@@ -8,7 +8,7 @@ This function is widely used in visual tracking (e.g fDSST, ECO) to extract HOG 
 #### Usage
 ```python
 import fhog
-def fhog(im_patch):
+def fHOG(im_patch):
     M = np.zeros(im_patch.shape[:2], dtype='float32')
     O = np.zeros(im_patch.shape[:2], dtype='float32')
     H = np.zeros([im_patch.shape[0]//4,im_patch.shape[1]//4, 32], dtype='float32') # python3
