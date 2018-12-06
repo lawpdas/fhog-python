@@ -16,8 +16,8 @@ gradientMag(PyObject *dummy, PyObject *args) {
 
 
     I_arr = (PyArrayObject *) PyArray_FROM_OF(arg1, NPY_ARRAY_F_CONTIGUOUS | NPY_ARRAY_ALIGNED);
-    M_arr = (PyArrayObject *) PyArray_FROM_OF(arg2, NPY_ARRAY_F_CONTIGUOUS | NPY_ARRAY_ALIGNED | NPY_ARRAY_WRITEABLE | NPY_ARRAY_UPDATEIFCOPY);
-    O_arr = (PyArrayObject *) PyArray_FROM_OF(arg3, NPY_ARRAY_F_CONTIGUOUS | NPY_ARRAY_ALIGNED | NPY_ARRAY_WRITEABLE | NPY_ARRAY_UPDATEIFCOPY);
+    M_arr = (PyArrayObject *) PyArray_FROM_OF(arg2, NPY_ARRAY_INOUT_FARRAY2);
+    O_arr = (PyArrayObject *) PyArray_FROM_OF(arg3, NPY_ARRAY_INOUT_FARRAY2);
 
     void *I = PyArray_DATA(I_arr);
     void *M = PyArray_DATA(M_arr);
@@ -40,6 +40,8 @@ gradientMag(PyObject *dummy, PyObject *args) {
 
 
     Py_DECREF(I_arr);
+    PyArray_ResolveWritebackIfCopy(M_arr);	
+    PyArray_ResolveWritebackIfCopy(O_arr);	
     Py_DECREF(M_arr);
     Py_DECREF(O_arr);
     Py_INCREF(Py_None);
@@ -60,7 +62,7 @@ gradientHist(PyObject *self, PyObject *args) {
 
     M_arr = (PyArrayObject *) PyArray_FROM_OF(arg1, NPY_ARRAY_F_CONTIGUOUS | NPY_ARRAY_ALIGNED);
     O_arr = (PyArrayObject *) PyArray_FROM_OF(arg2, NPY_ARRAY_F_CONTIGUOUS | NPY_ARRAY_ALIGNED);
-    H_arr = (PyArrayObject *) PyArray_FROM_OF(arg3, NPY_ARRAY_F_CONTIGUOUS | NPY_ARRAY_ALIGNED | NPY_ARRAY_WRITEABLE | NPY_ARRAY_UPDATEIFCOPY);
+    H_arr = (PyArrayObject *) PyArray_FROM_OF(arg3, NPY_ARRAY_INOUT_FARRAY2);
 
     void *M = PyArray_DATA(M_arr);
     void *O = PyArray_DATA(O_arr);
@@ -87,6 +89,7 @@ gradientHist(PyObject *self, PyObject *args) {
 
     Py_DECREF(M_arr);
     Py_DECREF(O_arr);
+    PyArray_ResolveWritebackIfCopy(H_arr);	
     Py_DECREF(H_arr);
     Py_INCREF(Py_None);
     return Py_None;
