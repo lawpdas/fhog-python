@@ -1,6 +1,6 @@
 # fhog-python
 A python wrapper for the fhog function of PDollar Toolbox.
-This function is widely used in visual tracking (e.g fDSST, ECO) to extract HOG feature.
+This function is widely used in visual tracking algorithms(e.g fDSST, ECO) to extract HOG feature.
 
 #### Install
 `python setup.py build_ext --inplace`
